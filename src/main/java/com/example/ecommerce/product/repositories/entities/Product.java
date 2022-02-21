@@ -38,10 +38,12 @@ public class Product {
     private Date createdDate;
     @Column(name="updated_date")
     private Date updatedDate;
+    @Column(name="size")
+    private String[] sizes;
 
     public Product(){}
 
-    public Product(int id, String name, String description, int price, int discountPercent, String promotionEndDate, int isDeliveryDiscount, int productModelId, int sizeId, String primaryImage, String[] secondaryImages, int brandId, int shopId, String status, Date createdDate, Date updatedDate) {
+    public Product(int id, String name, String description, int price, int discountPercent, String promotionEndDate, int isDeliveryDiscount, int productModelId, int sizeId, String primaryImage, String[] secondaryImages, int brandId, int shopId, String status, Date createdDate, Date updatedDate, String[] sizes) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -58,11 +60,48 @@ public class Product {
         this.status = status;
         this.createdDate = createdDate;
         this.updatedDate = updatedDate;
+        this.sizes = sizes;
     }
 
     @ManyToOne(optional=false)
     @JoinColumn(name = "brand_id", insertable=false, updatable=false)
     private Brand brand;
+
+    @ManyToOne(optional=false)
+    @JoinColumn(name = "shop_id", insertable=false, updatable=false)
+    private Shop shop;
+
+    @ManyToOne(optional=false)
+    @JoinColumn(name = "product_model_id", insertable=false, updatable=false)
+    private ProductModel productModel;
+
+    public void setSizes(String[] sizes) {
+        this.sizes = sizes;
+    }
+
+    public ProductModel getProductModel() {
+        return productModel;
+    }
+
+    public void setProductModel(ProductModel productModel) {
+        this.productModel = productModel;
+    }
+
+    public String[] getSizes() {
+        return sizes;
+    }
+
+    public void setSize(String[] sizes) {
+        this.sizes = sizes;
+    }
+
+    public Shop getShop() {
+        return shop;
+    }
+
+    public void setShop(Shop shop) {
+        this.shop = shop;
+    }
 
     public Brand getBrand() {
         return brand;
