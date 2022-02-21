@@ -1,28 +1,76 @@
-package com.example.ecommerce.product.repositories;
+package com.example.ecommerce.product.repositories.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
 public class Product {
     @Id
     private int id;
+    @Column(name="name")
     private String name;
+    @Column(name="description")
     private String description;
+    @Column(name="price")
     private int price;
-    private int discount_percent;
-    private String promotion_end_date;
+    @Column(name="discount_percent")
+    private int discountPercent;
+    @Column(name="promotion_end_date")
+    private String promotionEndDate;
+    @Column(name="is_delivery_discount")
     private int isDeliveryDiscount;
-    private int product_model_id;
-    private int size_id;
-    private String primary_image;
-    private List<String> secondary_images;
-    private int brand_id;
-    private int shop_id;
+    @Column(name="product_model_id")
+    private int productModelId;
+    @Column(name="size_id")
+    private int sizeId;
+    @Column(name="primary_image")
+    private String primaryImage;
+    @Column(name="secondary_image")
+    private String[] secondaryImages;
+    @Column(name="brand_id")
+    private int brandId;
+    @Column(name="shop_id")
+    private int shopId;
+    @Column(name="status")
     private String status;
-    private String created_date;
-    private String updated_date;
+    @Column(name="created_date")
+    private Date createdDate;
+    @Column(name="updated_date")
+    private Date updatedDate;
+
+    public Product(){}
+
+    public Product(int id, String name, String description, int price, int discountPercent, String promotionEndDate, int isDeliveryDiscount, int productModelId, int sizeId, String primaryImage, String[] secondaryImages, int brandId, int shopId, String status, Date createdDate, Date updatedDate) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.discountPercent = discountPercent;
+        this.promotionEndDate = promotionEndDate;
+        this.isDeliveryDiscount = isDeliveryDiscount;
+        this.productModelId = productModelId;
+        this.sizeId = sizeId;
+        this.primaryImage = primaryImage;
+        this.secondaryImages = secondaryImages;
+        this.brandId = brandId;
+        this.shopId = shopId;
+        this.status = status;
+        this.createdDate = createdDate;
+        this.updatedDate = updatedDate;
+    }
+
+    @ManyToOne(optional=false)
+    @JoinColumn(name = "brand_id", insertable=false, updatable=false)
+    private Brand brand;
+
+    public Brand getBrand() {
+        return brand;
+    }
+
+    public void setBrand(Brand brand) {
+        this.brand = brand;
+    }
 
     public int getId() {
         return id;
@@ -56,20 +104,20 @@ public class Product {
         this.price = price;
     }
 
-    public int getDiscount_percent() {
-        return discount_percent;
+    public int getDiscountPercent() {
+        return discountPercent;
     }
 
-    public void setDiscount_percent(int discount_percent) {
-        this.discount_percent = discount_percent;
+    public void setDiscountPercent(int discountPercent) {
+        this.discountPercent = discountPercent;
     }
 
-    public String getPromotion_end_date() {
-        return promotion_end_date;
+    public String getPromotionEndDate() {
+        return promotionEndDate;
     }
 
-    public void setPromotion_end_date(String promotion_end_date) {
-        this.promotion_end_date = promotion_end_date;
+    public void setPromotionEndDate(String promotionEndDate) {
+        this.promotionEndDate = promotionEndDate;
     }
 
     public int getIsDeliveryDiscount() {
@@ -80,52 +128,52 @@ public class Product {
         this.isDeliveryDiscount = isDeliveryDiscount;
     }
 
-    public int getProduct_model_id() {
-        return product_model_id;
+    public int getProductModelId() {
+        return productModelId;
     }
 
-    public void setProduct_model_id(int product_model_id) {
-        this.product_model_id = product_model_id;
+    public void setProductModelId(int productModelId) {
+        this.productModelId = productModelId;
     }
 
-    public int getSize_id() {
-        return size_id;
+    public int getSizeId() {
+        return sizeId;
     }
 
-    public void setSize_id(int size_id) {
-        this.size_id = size_id;
+    public void setSizeId(int sizeId) {
+        this.sizeId = sizeId;
     }
 
-    public String getPrimary_image() {
-        return primary_image;
+    public String getPrimaryImage() {
+        return primaryImage;
     }
 
-    public void setPrimary_image(String primary_image) {
-        this.primary_image = primary_image;
+    public void setPrimaryImage(String primaryImage) {
+        this.primaryImage = primaryImage;
     }
 
-    public List<String> getSecondary_images() {
-        return secondary_images;
+    public String[] getSecondaryImages() {
+        return secondaryImages;
     }
 
-    public void setSecondary_images(List<String> secondary_images) {
-        this.secondary_images = secondary_images;
+    public void setSecondaryImages(String[]  secondaryImages) {
+        this.secondaryImages = secondaryImages;
     }
 
-    public int getBrand_id() {
-        return brand_id;
+    public int getBrandId() {
+        return brandId;
     }
 
-    public void setBrand_id(int brand_id) {
-        this.brand_id = brand_id;
+    public void setBrandId(int brandId) {
+        this.brandId = brandId;
     }
 
-    public int getShop_id() {
-        return shop_id;
+    public int getShopId() {
+        return shopId;
     }
 
-    public void setShop_id(int shop_id) {
-        this.shop_id = shop_id;
+    public void setShopId(int shopId) {
+        this.shopId = shopId;
     }
 
     public String getStatus() {
@@ -136,19 +184,19 @@ public class Product {
         this.status = status;
     }
 
-    public String getCreated_date() {
-        return created_date;
+    public Date getCreatedDate() {
+        return createdDate;
     }
 
-    public void setCreated_date(String created_date) {
-        this.created_date = created_date;
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 
-    public String getUpdated_date() {
-        return updated_date;
+    public Date getUpdatedDate() {
+        return updatedDate;
     }
 
-    public void setUpdated_date(String updated_date) {
-        this.updated_date = updated_date;
+    public void setUpdatedDate(Date updatedDate) {
+        this.updatedDate = updatedDate;
     }
 }
