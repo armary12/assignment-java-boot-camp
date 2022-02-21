@@ -2,6 +2,7 @@ package com.example.ecommerce.product.controllers;
 
 import com.example.ecommerce.landing.models.LandingResponse;
 import com.example.ecommerce.landing.services.LandingService;
+import com.example.ecommerce.product.models.ProductResponse;
 import com.example.ecommerce.product.repositories.entities.Product;
 import com.example.ecommerce.product.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ public class ProductController {
     ProductService productService;
 
     @GetMapping("/api/v1/product/{id}")
-    public Product getProductById(@PathVariable int id) {
+    public ProductResponse getProductById(@PathVariable int id) {
         return productService.getProductById(id);
     }
 }

@@ -31,6 +31,14 @@ public class Shop {
         this.updatedDate = updatedDate;
     }
 
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
     public int getId() {
         return id;
     }
