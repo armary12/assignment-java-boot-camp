@@ -1,13 +1,16 @@
 package com.example.ecommerce.product.services;
 
-import com.example.ecommerce.landing.models.LandingResponse;
+import com.example.ecommerce.product.exceptions.ProductNotFoundException;
 import com.example.ecommerce.product.models.ProductResponse;
 import com.example.ecommerce.product.repositories.ProductRepository;
 import com.example.ecommerce.product.repositories.entities.Product;
+import com.example.ecommerce.product.repositories.entities.ProductReview;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
@@ -17,9 +20,24 @@ public class ProductService {
 
     public ProductResponse getProductById(int id) {
         Optional<Product> product = productRepository.findById(id);
+        if (product.isEmpty()){
+            throw new ProductNotFoundException("Product not found");
+        }
         ProductResponse productresponse = mapProductResponse(product.get());
         return productresponse;
     }
+
+    public List<ProductResponse> getProducts(String search) {
+        List<Product> products;
+        if (search != null && !search.isEmpty()){
+            products = productRepository.findByNameContaining(search);
+        } else {
+            products = productRepository.findAll();
+        }
+        List<ProductResponse> productsResponse = products.stream().map(e -> mapProductResponse(e)).collect(Collectors.toList());
+        return productsResponse;
+    }
+
 
     private ProductResponse mapProductResponse(Product product) {
         ProductResponse productResponse = new ProductResponse();
@@ -39,6 +57,15 @@ public class ProductService {
         productResponse.setShopProvince(product.getShop().getProvince());
         productResponse.setStatus(product.getStatus());
         productResponse.setSizes(product.getSizes());
+        productResponse.setReviewerCount(product.getProductReviews().size());
+        productResponse.setScore(calculateReviewScore(product.getProductReviews()));
         return productResponse;
+    }
+
+    private int calculateReviewScore(List<ProductReview> productReviews) {
+        if (productReviews.size() == 0) {
+            return 0;
+        }
+        return productReviews.stream().mapToInt(e -> e.getScore()).sum()/productReviews.size();
     }
 }

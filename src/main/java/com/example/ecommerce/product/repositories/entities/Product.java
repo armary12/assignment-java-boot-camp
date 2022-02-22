@@ -41,10 +41,25 @@ public class Product {
     @Column(name="size")
     private String[] sizes;
 
+    @ManyToOne(optional=false)
+    @JoinColumn(name = "brand_id", insertable=false, updatable=false)
+    private Brand brand;
+
+    @ManyToOne(optional=false)
+    @JoinColumn(name = "shop_id", insertable=false, updatable=false)
+    private Shop shop;
+
+    @ManyToOne(optional=false)
+    @JoinColumn(name = "product_model_id", insertable=false, updatable=false)
+    private ProductModel productModel;
+
+    @OneToMany(mappedBy="product_id")
+    private List<ProductReview> productReviews;
+
     public Product(){}
 
     public Product(int id, String name, String description, int price, int discountPercent, String promotionEndDate, int isDeliveryDiscount, int productModelId, int sizeId, String primaryImage, String[] secondaryImages, int brandId, int shopId, String status, Date createdDate, Date updatedDate, String[] sizes) {
-        this.id = id;
+        this.id =id;
         this.name = name;
         this.description = description;
         this.price = price;
@@ -63,17 +78,13 @@ public class Product {
         this.sizes = sizes;
     }
 
-    @ManyToOne(optional=false)
-    @JoinColumn(name = "brand_id", insertable=false, updatable=false)
-    private Brand brand;
+    public List<ProductReview> getProductReviews() {
+        return productReviews;
+    }
 
-    @ManyToOne(optional=false)
-    @JoinColumn(name = "shop_id", insertable=false, updatable=false)
-    private Shop shop;
-
-    @ManyToOne(optional=false)
-    @JoinColumn(name = "product_model_id", insertable=false, updatable=false)
-    private ProductModel productModel;
+    public void setProductReviews(List<ProductReview> productReviews) {
+        this.productReviews = productReviews;
+    }
 
     public void setSizes(String[] sizes) {
         this.sizes = sizes;
