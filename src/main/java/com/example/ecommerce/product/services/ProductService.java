@@ -4,10 +4,10 @@ import com.example.ecommerce.product.exceptions.ProductNotFoundException;
 import com.example.ecommerce.product.models.ProductResponse;
 import com.example.ecommerce.product.repositories.ProductRepository;
 import com.example.ecommerce.product.repositories.entities.Product;
+import com.example.ecommerce.product.repositories.entities.ProductReview;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -57,6 +57,15 @@ public class ProductService {
         productResponse.setShopProvince(product.getShop().getProvince());
         productResponse.setStatus(product.getStatus());
         productResponse.setSizes(product.getSizes());
+        productResponse.setReviewerCount(product.getProductReviews().size());
+        productResponse.setScore(calculateReviewScore(product.getProductReviews()));
         return productResponse;
+    }
+
+    private int calculateReviewScore(List<ProductReview> productReviews) {
+        if (productReviews.size() == 0) {
+            return 0;
+        }
+        return productReviews.stream().mapToInt(e -> e.getScore()).sum()/productReviews.size();
     }
 }

@@ -21,6 +21,24 @@ public class ProductResponse {
     private String ShopProvince;
     private String status;
     private String[] sizes;
+    private int score;
+    private int reviewerCount;
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public int getReviewerCount() {
+        return reviewerCount;
+    }
+
+    public void setReviewerCount(int reviewerCount) {
+        this.reviewerCount = reviewerCount;
+    }
 
     public int getId() {
         return id;
