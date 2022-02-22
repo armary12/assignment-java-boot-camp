@@ -1,13 +1,15 @@
 package com.example.ecommerce.product.services;
 
-import com.example.ecommerce.landing.models.LandingResponse;
+import com.example.ecommerce.product.exceptions.ProductNotFoundException;
 import com.example.ecommerce.product.models.ProductResponse;
 import com.example.ecommerce.product.repositories.ProductRepository;
 import com.example.ecommerce.product.repositories.entities.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
@@ -17,9 +19,21 @@ public class ProductService {
 
     public ProductResponse getProductById(int id) {
         Optional<Product> product = productRepository.findById(id);
+        if (product.isEmpty()){
+            throw new ProductNotFoundException("Product not found");
+        }
         ProductResponse productresponse = mapProductResponse(product.get());
         return productresponse;
     }
+
+    public List<ProductResponse> getProducts() {
+        List<Product> products = productRepository.findAll();
+
+
+        List<ProductResponse> productsResponse = products.stream().map(e -> mapProductResponse(e)).collect(Collectors.toList());
+        return productsResponse;
+    }
+
 
     private ProductResponse mapProductResponse(Product product) {
         ProductResponse productResponse = new ProductResponse();

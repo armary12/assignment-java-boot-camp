@@ -7,6 +7,7 @@ import java.util.List;
 @Entity
 public class Product {
     @Id
+    @GeneratedValue
     private int id;
     @Column(name="name")
     private String name;
@@ -43,8 +44,7 @@ public class Product {
 
     public Product(){}
 
-    public Product(int id, String name, String description, int price, int discountPercent, String promotionEndDate, int isDeliveryDiscount, int productModelId, int sizeId, String primaryImage, String[] secondaryImages, int brandId, int shopId, String status, Date createdDate, Date updatedDate, String[] sizes) {
-        this.id = id;
+    public Product(String name, String description, int price, int discountPercent, String promotionEndDate, int isDeliveryDiscount, int productModelId, int sizeId, String primaryImage, String[] secondaryImages, int brandId, int shopId, String status, Date createdDate, Date updatedDate, String[] sizes) {
         this.name = name;
         this.description = description;
         this.price = price;
