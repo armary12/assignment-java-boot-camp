@@ -2,8 +2,10 @@ package com.example.ecommerce.basket.models;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class BasketItem {
+public class BasketItem implements Serializable {
     private int productId;
     private String productName;
     private String productImg;

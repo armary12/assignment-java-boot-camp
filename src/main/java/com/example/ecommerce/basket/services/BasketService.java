@@ -23,8 +23,8 @@ public class BasketService {
     public Basket createBasket(CreateBasketRequest request) {
         Basket basket = new Basket();
         basket.setUserId(request.getUserId());
-        basket.setBasketItem(request.getBasketItems());
-        basket.setTotalPrice(Arrays.stream(request.getBasketItems()).mapToInt(e->e.getNetPrice() * e.getProductPrice()).sum());
+        basket.setBasketItems(request.getBasketItems());
+        basket.setTotalPrice(Arrays.stream(request.getBasketItems()).mapToInt(e->e.getNetPrice() * e.getProductQuantity()).sum());
         basket.setTotalQuantity(Arrays.stream(request.getBasketItems()).mapToInt(BasketItem::getProductQuantity).sum());
         basket.setCreatedDate(new Date());
 
@@ -40,7 +40,7 @@ public class BasketService {
         GetBasketResponse basketResponse = new GetBasketResponse();
         basketResponse.setId(basket.getId());
         basketResponse.setUserId(basket.getUserId());
-        basketResponse.setBasketItems(basket.getBasketItem());
+        basketResponse.setBasketItems(basket.getBasketItems());
         basketResponse.setTotalPrice(basket.getTotalPrice());
         basketResponse.setTotalQuantity(basket.getTotalQuantity());
         return basketResponse;

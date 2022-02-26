@@ -3,10 +3,7 @@ package com.example.ecommerce.basket.repositories.entities;
 import com.example.ecommerce.basket.models.BasketItem;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -15,8 +12,8 @@ public class Basket {
     @Id
     @GeneratedValue
     private int id;
-    @Transient
-    private BasketItem[] basketItem;
+    @Lob
+    private BasketItem[] basketItems;
     private int userId;
     private int totalPrice;
     private int totalQuantity;
