@@ -1,5 +1,6 @@
 package com.example.ecommerce.basket.services;
 
+import com.example.ecommerce.basket.exceptions.BasketNotFoundException;
 import com.example.ecommerce.basket.models.BasketItem;
 import com.example.ecommerce.basket.models.CreateBasketRequest;
 import com.example.ecommerce.basket.models.GetBasketResponse;
