@@ -1,7 +1,10 @@
 package com.example.ecommerce.order.services;
 
+import com.example.ecommerce.order.gateways.PaymentGateway;
 import com.example.ecommerce.order.models.OrderConfirmRequest;
 import com.example.ecommerce.order.models.OrderItem;
+import com.example.ecommerce.order.models.PaymentGatewayRequest;
+import com.example.ecommerce.order.models.PaymentGatewayResponse;
 import com.example.ecommerce.order.repositories.OrderTransactionItemRepository;
 import com.example.ecommerce.order.repositories.OrderTransactionRepository;
 import com.example.ecommerce.order.repositories.entities.OrderTransaction;
@@ -12,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrderService {
@@ -20,6 +24,9 @@ public class OrderService {
     OrderTransactionRepository orderTransactionRepository;
     @Autowired
     OrderTransactionItemRepository orderTransactionItemRepository;
+    @Autowired
+    PaymentGateway paymentGateway;
+
 
     public OrderTransaction createOrderTransaction(OrderConfirmRequest orderTransactionRequest){
         OrderTransaction createOrderTransaction = new OrderTransaction();
@@ -32,6 +39,7 @@ public class OrderService {
         createOrderTransaction.setPromotionDetail(orderTransactionRequest.getPromotionDetail());
         createOrderTransaction.setShippingDetail(orderTransactionRequest.getShippingDetail());
         createOrderTransaction.setCreatedDate(new Date());
+        createOrderTransaction.setOrderStatus("PENDING");
         OrderTransaction orderTransaction = orderTransactionRepository.save(createOrderTransaction);
 
         List<OrderTransactionItem> orderTransactionItemList = new ArrayList<>();
@@ -47,6 +55,24 @@ public class OrderService {
         }
         orderTransactionItemRepository.saveAll(orderTransactionItemList);
 
+        PaymentGatewayRequest paymentGatewayRequest = new PaymentGatewayRequest();
+        paymentGatewayRequest.setOrderId(orderTransaction.getId());
+        paymentGatewayRequest.setCardHolderName(orderTransactionRequest.getPaymentDetail().getCardHolderName());
+        paymentGatewayRequest.setUserId(orderTransactionRequest.getUserId());
+        paymentGatewayRequest.setCardType(orderTransactionRequest.getPaymentDetail().getCardType());
+        paymentGatewayRequest.setCardNumber(orderTransactionRequest.getPaymentDetail().getCardNumber());
+        paymentGatewayRequest.setExpiredDate(orderTransactionRequest.getPaymentDetail().getExpiredDate());
+        paymentGatewayRequest.setTotalAmount(orderTransactionRequest.getNetPrice());
+        PaymentGatewayResponse paymentGatewayResponse =  paymentGateway.submitPayment(paymentGatewayRequest);
+
+        if (paymentGatewayResponse.getStatusMessage() == "success") {
+            Optional<OrderTransaction> orderTransactionOptional =  orderTransactionRepository.findById(orderTransaction.getId());
+            if (orderTransactionOptional.isPresent()){
+                OrderTransaction updateOrderTransaction = orderTransactionOptional.get();
+                updateOrderTransaction.setOrderStatus("SUCCESS");
+                orderTransactionRepository.save(updateOrderTransaction);
+            }
+        }
         return orderTransaction;
     }
 }

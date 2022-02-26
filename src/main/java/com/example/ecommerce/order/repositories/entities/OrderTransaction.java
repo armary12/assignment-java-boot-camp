@@ -25,5 +25,6 @@ public class OrderTransaction {
     private String deliveryAddress;
     private PromotionDetail promotionDetail;
     private ShippingDetail shippingDetail;
+    private String orderStatus;
     private Date CreatedDate;
 }
