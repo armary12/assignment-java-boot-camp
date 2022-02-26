@@ -20,4 +20,10 @@ public class BasketController {
     public Basket createBasket(@RequestBody CreateBasketRequest createBasketRequest) {
         return basketService.createBasket(createBasketRequest);
     }
+
+    @GetMapping("/api/v1/basket/{userId}")
+    public Basket getBasket(@PathVariable int userId) {
+        return basketService.getBasket(userId);
+    }
+
 }
