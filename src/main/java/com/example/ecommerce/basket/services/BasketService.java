@@ -5,11 +5,13 @@ import com.example.ecommerce.basket.models.CreateBasketRequest;
 import com.example.ecommerce.basket.models.GetBasketResponse;
 import com.example.ecommerce.basket.repositories.BasketRepository;
 import com.example.ecommerce.basket.repositories.entities.Basket;
+import com.example.ecommerce.product.exceptions.ProductNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Optional;
 
 @Service
 public class BasketService {
@@ -29,7 +31,11 @@ public class BasketService {
     }
 
     public GetBasketResponse getBasket(int userId) {
-        Basket basket = basketRepository.getByUserId(userId);
+        Optional<Basket> basketOptional = basketRepository.findByUserId(userId);
+        if (basketOptional.isEmpty()){
+            throw new BasketNotFoundException("Basket not found");
+        }
+        Basket basket = basketOptional.get();
         GetBasketResponse basketResponse = new GetBasketResponse();
         basketResponse.setId(basket.getId());
         basketResponse.setUserId(basket.getUserId());
