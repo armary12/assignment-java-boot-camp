@@ -1,5 +1,8 @@
 package com.example.ecommerce.basket.controllers;
 
+import com.example.ecommerce.basket.models.CreateBasketRequest;
+import com.example.ecommerce.basket.repositories.entities.Basket;
+import com.example.ecommerce.basket.services.BasketService;
 import com.example.ecommerce.product.models.ProductResponse;
 import com.example.ecommerce.product.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +14,10 @@ import java.util.List;
 public class BasketController {
 
     @Autowired
-    ProductService productService;
+    BasketService basketService;
 
     @PostMapping("/api/v1/basket")
-    public ProductResponse getProductById(@PathVariable int id) {
-        return productService.getProductById(id);
+    public Basket createBasket(@RequestBody CreateBasketRequest createBasketRequest) {
+        return basketService.createBasket(createBasketRequest);
     }
-
 }
