@@ -25,6 +25,8 @@ public class User {
     private Date createdDate;
     private Date updateDate;
 
+    public User(){};
+
     public User(int id, String firstName, String lastName, String gender, String address, String postalCode, String vatAddress, String vatPostalCode, String phone, String email, int newsSubscription, String status, Date createdDate, Date updateDate) {
         this.id = id;
         this.firstName = firstName;

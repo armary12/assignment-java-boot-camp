@@ -13,7 +13,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @GetMapping
+    @GetMapping("api/v1/user/{userId}")
     public GetUserResponse getUser(@PathVariable int userId){
         return userService.getUser(userId);
     }

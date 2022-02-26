@@ -25,6 +25,7 @@ public class UserService {
         userResponse.setId(user.getId());
         userResponse.setFirstName(user.getFirstName());
         userResponse.setLastName(user.getLastName());
+        userResponse.setGender(user.getGender());
         userResponse.setAddress(user.getAddress());
         userResponse.setPostalCode(user.getPostalCode());
         userResponse.setVatAddress(user.getVatAddress());
