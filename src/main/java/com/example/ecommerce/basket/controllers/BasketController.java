@@ -1,6 +1,7 @@
 package com.example.ecommerce.basket.controllers;
 
 import com.example.ecommerce.basket.models.CreateBasketRequest;
+import com.example.ecommerce.basket.models.GetBasketResponse;
 import com.example.ecommerce.basket.repositories.entities.Basket;
 import com.example.ecommerce.basket.services.BasketService;
 import com.example.ecommerce.product.models.ProductResponse;
@@ -22,7 +23,7 @@ public class BasketController {
     }
 
     @GetMapping("/api/v1/basket/{userId}")
-    public Basket getBasket(@PathVariable int userId) {
+    public GetBasketResponse getBasket(@PathVariable int userId) {
         return basketService.getBasket(userId);
     }
 
