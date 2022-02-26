@@ -21,7 +21,7 @@ public class BasketService {
         Basket basket = new Basket();
         basket.setUserId(request.getUserId());
         basket.setBasketItem(request.getBasketItems());
-        basket.setTotalPrice(Arrays.stream(request.getBasketItems()).mapToInt(e->e.getProductQuantity() * e.getProductPrice()).sum());
+        basket.setTotalPrice(Arrays.stream(request.getBasketItems()).mapToInt(e->e.getNetPrice() * e.getProductPrice()).sum());
         basket.setTotalQuantity(Arrays.stream(request.getBasketItems()).mapToInt(BasketItem::getProductQuantity).sum());
         basket.setCreatedDate(new Date());
 

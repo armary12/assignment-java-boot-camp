@@ -8,8 +8,9 @@ public class BasketItem {
     private String productName;
     private String productImg;
     private String productSize;
-    private String ShopName;
+    private String shopName;
     private int productPrice;
+    private int netPrice;
     private int discountPercent;
     private int productQuantity;
 }
