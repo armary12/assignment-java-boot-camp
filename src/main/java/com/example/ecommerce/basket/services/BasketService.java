@@ -27,4 +27,15 @@ public class BasketService {
 
         return basketRepository.save(basket);
     }
+
+    public GetBasketResponse getBasket(int userId) {
+        Basket basket = basketRepository.getByUserId(userId);
+        GetBasketResponse basketResponse = new GetBasketResponse();
+        basketResponse.setId(basket.getId());
+        basketResponse.setUserId(basket.getUserId());
+        basketResponse.setBasketItems(basket.getBasketItem());
+        basketResponse.setTotalPrice(basket.getTotalPrice());
+        basketResponse.setTotalQuantity(basket.getTotalQuantity());
+        return basketResponse;
+    }
 }
