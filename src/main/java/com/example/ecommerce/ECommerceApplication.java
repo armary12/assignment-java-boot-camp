@@ -2,6 +2,8 @@ package com.example.ecommerce;
 
 import com.example.ecommerce.product.repositories.*;
 import com.example.ecommerce.product.repositories.entities.*;
+import com.example.ecommerce.user.repositories.UserRepository;
+import com.example.ecommerce.user.repositories.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -25,9 +27,17 @@ public class ECommerceApplication {
 	ProductModelRepository productModelRepository;
 	@Autowired
 	ProductReviewRepository productReviewRepository;
+	@Autowired
+	UserRepository userRepository;
+
+
 
 	@PostConstruct
 	public void initializeData() {
+		List<User> userList = new ArrayList<>();
+		userList.add(new User(1, "Chonlatid", "Jitbute","MALE","16 Charoemprakiet Rama 9 45 yak 2 Nongbon Pravet Bangkok", "10250", "16 Charoemprakiet Rama 9 45 yak 2 Nongbon Pravet Bangkok","10250","0987654321","chonlaird.jit@gmail.com",1,"ACTIVE",new Date(), null));
+		userRepository.saveAll(userList);
+
 		List<Brand> brandList = new ArrayList<>();
 		brandList.add(new Brand(1, "ADIDAS","","","","ACTIVE",new Date(),null));
 		brandList.add(new Brand(2, "POCA","","","","ACTIVE",new Date(),null));
