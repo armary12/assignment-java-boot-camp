@@ -1,7 +1,13 @@
 package com.example.ecommerce.user.repositories.entities;
 
-import javax.persistence.Id;
+import lombok.Data;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import java.util.Date;
+
+@Entity
+@Data
 public class User {
     @Id
     private int id;
@@ -16,8 +22,10 @@ public class User {
     private String email;
     private int newsSubscription;
     private String status;
+    private Date createdDate;
+    private Date updateDate;
 
-    public User(int id, String firstName, String lastName, String gender, String address, String postalCode, String vatAddress, String vatPostalCode, String phone, String email, int newsSubscription, String status) {
+    public User(int id, String firstName, String lastName, String gender, String address, String postalCode, String vatAddress, String vatPostalCode, String phone, String email, int newsSubscription, String status, Date createdDate, Date updateDate) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -30,5 +38,7 @@ public class User {
         this.email = email;
         this.newsSubscription = newsSubscription;
         this.status = status;
+        this.createdDate = createdDate;
+        this.updateDate = updateDate;
     }
 }

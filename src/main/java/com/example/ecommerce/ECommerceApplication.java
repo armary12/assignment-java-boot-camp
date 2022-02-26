@@ -35,7 +35,7 @@ public class ECommerceApplication {
 	@PostConstruct
 	public void initializeData() {
 		List<User> userList = new ArrayList<>();
-		userList.add(new User(1, "Chonlatid", "Jitbute","MALE","16 Charoemprakiet Rama 9 45 yak 2 Nongbon Pravet Bangkok", "10250", "16 Charoemprakiet Rama 9 45 yak 2 Nongbon Pravet Bangkok","10250","0987654321","chonlaird.jit@gmail.com",1,"ACTIVE"));
+		userList.add(new User(1, "Chonlatid", "Jitbute","MALE","16 Charoemprakiet Rama 9 45 yak 2 Nongbon Pravet Bangkok", "10250", "16 Charoemprakiet Rama 9 45 yak 2 Nongbon Pravet Bangkok","10250","0987654321","chonlaird.jit@gmail.com",1,"ACTIVE",new Date(), null));
 		userRepository.saveAll(userList);
 
 		List<Brand> brandList = new ArrayList<>();
