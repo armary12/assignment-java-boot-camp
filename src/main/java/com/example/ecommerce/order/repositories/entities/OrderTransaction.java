@@ -1,9 +1,12 @@
 package com.example.ecommerce.order.repositories.entities;
 
 import com.example.ecommerce.order.models.PaymentDetail;
+import com.example.ecommerce.order.models.PromotionDetail;
+import com.example.ecommerce.order.models.ShippingDetail;
 import lombok.Data;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.Date;
 
@@ -11,6 +14,7 @@ import java.util.Date;
 @Data
 public class OrderTransaction {
     @Id
+    @GeneratedValue
     private int id;
     private int netPrice;
     private int deliveryPrice;
@@ -19,10 +23,7 @@ public class OrderTransaction {
     private int userId;
     private PaymentDetail paymentDetail;
     private String deliveryAddress;
-    private String deliveryLat;
-    private String deliveryLng;
-    private String shopLat;
-    private String shopLng;
-    private String promotionDetail;
+    private PromotionDetail promotionDetail;
+    private ShippingDetail shippingDetail;
     private Date CreatedDate;
 }

@@ -4,6 +4,7 @@ import com.example.ecommerce.order.models.PaymentDetail;
 import lombok.Data;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.Date;
 
@@ -11,10 +12,12 @@ import java.util.Date;
 @Data
 public class OrderTransactionItem {
     @Id
+    @GeneratedValue
     private int id;
     private int orderTransactionId;
     private int price;
     private int quantity;
     private int totalPrice;
+    private int productId;
     private Date createdDate;
 }
