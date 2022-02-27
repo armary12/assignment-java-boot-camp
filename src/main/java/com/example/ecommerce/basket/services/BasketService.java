@@ -47,4 +47,8 @@ public class BasketService {
         basketResponse.setTotalQuantity(basket.getTotalQuantity());
         return basketResponse;
     }
+
+    public void setBasketRepository(BasketRepository basketRepository) {
+        this.basketRepository = basketRepository;
+    }
 }
