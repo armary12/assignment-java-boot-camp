@@ -1,5 +1,6 @@
 package com.example.ecommerce.order.services;
 
+import com.example.ecommerce.order.exceptions.PaymentFailException;
 import com.example.ecommerce.order.gateways.PaymentGateway;
 import com.example.ecommerce.order.models.OrderConfirmRequest;
 import com.example.ecommerce.order.models.OrderItem;
@@ -52,7 +53,6 @@ public class OrderService {
         createOrderTransaction.setOrderTransactionItems(orderTransactionItemList);
         OrderTransaction orderTransaction = orderTransactionRepository.save(createOrderTransaction);
 
-
         PaymentGatewayRequest paymentGatewayRequest = new PaymentGatewayRequest();
         paymentGatewayRequest.setOrderId(orderTransaction.getId());
         paymentGatewayRequest.setCardHolderName(orderTransactionRequest.getPaymentDetail().getCardHolderName());
@@ -69,6 +69,8 @@ public class OrderService {
                 OrderTransaction updateOrderTransaction = orderTransactionOptional.get();
                 updateOrderTransaction.setOrderStatus("SUCCESS");
                 orderTransactionRepository.save(updateOrderTransaction);
+            } else {
+                throw new PaymentFailException("Payment fail");
             }
         }
         return orderTransaction;
