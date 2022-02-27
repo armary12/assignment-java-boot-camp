@@ -18,7 +18,7 @@ public class OrderTransactionItem {
     private Date createdDate;
 
     @ManyToOne
-    @JoinColumn(name = "orderTransaction_id", nullable = false)
+    @JoinColumn(name = "order_transaction_id", nullable = false)
     private OrderTransaction orderTransaction;
 
 }
