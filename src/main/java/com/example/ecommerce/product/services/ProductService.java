@@ -20,19 +20,16 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    public ResponseModel<ProductResponse> getProductById(int id) {
+    public ProductResponse getProductById(int id) {
         Optional<Product> product = productRepository.findById(id);
         if (product.isEmpty()){
             throw new ProductNotFoundException("Product not found");
         }
         ProductResponse productResponse = mapProductResponse(product.get());
-
-        ResponseModel<ProductResponse> response = new ResponseModel();
-        response.setData(productResponse);
-        return response;
+        return productResponse;
     }
 
-    public ResponseModel<List<ProductResponse>> getProducts(String search) {
+    public List<ProductResponse> getProducts(String search) {
         List<Product> products;
         if (search != null && !search.isEmpty()){
             products = productRepository.findByNameContaining(search);
@@ -40,10 +37,7 @@ public class ProductService {
             products = productRepository.findAll();
         }
         List<ProductResponse> productsResponse = products.stream().map(e -> mapProductResponse(e)).collect(Collectors.toList());
-
-        ResponseModel<List<ProductResponse>> response = new ResponseModel();
-        response.setData(productsResponse);
-        return response;
+        return productsResponse;
     }
 
 

@@ -24,13 +24,10 @@ public class OrderService {
     PaymentGateway paymentGateway;
 
 
-    public ResponseModel<OrderTransaction> createOrderTransaction(OrderConfirmRequest orderTransactionRequest) {
+    public OrderTransaction createOrderTransaction(OrderConfirmRequest orderTransactionRequest) {
         OrderTransaction orderTransaction = saveOrderTransaction(orderTransactionRequest);
         validatePayment(orderTransaction.getId(), orderTransactionRequest);
-
-        ResponseModel<OrderTransaction> response = new ResponseModel();
-        response.setData(orderTransaction);
-        return response;
+        return orderTransaction;
     }
 
     private OrderTransaction saveOrderTransaction(OrderConfirmRequest request) {

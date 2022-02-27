@@ -16,7 +16,7 @@ public class UserControllerAdvice {
     @ResponseBody
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseModel userNotFound(UserNotFoundException e) {
-        ResponseModel responseModel = new ResponseModel();
+        ResponseModel responseModel = new ResponseModel(null);
         responseModel.setMessage(e.getMessage());
         return responseModel;
     }

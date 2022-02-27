@@ -15,7 +15,7 @@ public class BasketControllerAdvice {
     @ResponseBody
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseModel basketNotFound(BasketNotFoundException e) {
-        ResponseModel responseModel = new ResponseModel();
+        ResponseModel responseModel = new ResponseModel(null);
         responseModel.setMessage(e.getMessage());
         return responseModel;
     }

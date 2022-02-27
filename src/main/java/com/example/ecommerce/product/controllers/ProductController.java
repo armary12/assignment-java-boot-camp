@@ -21,11 +21,11 @@ public class ProductController {
 
     @GetMapping("/api/v1/product/{id}")
     public ResponseModel<ProductResponse> getProductById(@PathVariable int id) {
-        return productService.getProductById(id);
+        return new ResponseModel(productService.getProductById(id));
     }
 
     @GetMapping("/api/v1/product")
     public ResponseModel<List<ProductResponse>> getProducts(@RequestParam(value = "search", required = false) String search) {
-        return productService.getProducts(search);
+        return new ResponseModel(productService.getProducts(search));
     }
 }

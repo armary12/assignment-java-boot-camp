@@ -17,6 +17,6 @@ public class OrderController {
 
     @PostMapping("api/v1/order/confirm")
     public ResponseModel<OrderTransaction> confirmOrder(@RequestBody OrderConfirmRequest orderConfirmRequest){
-        return orderService.createOrderTransaction(orderConfirmRequest);
+        return new ResponseModel(orderService.createOrderTransaction(orderConfirmRequest));
     }
 }

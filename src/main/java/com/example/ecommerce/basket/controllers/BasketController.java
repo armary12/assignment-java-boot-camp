@@ -20,12 +20,12 @@ public class BasketController {
 
     @PostMapping("/api/v1/basket")
     public ResponseModel<Basket> createBasket(@RequestBody CreateBasketRequest createBasketRequest) {
-        return basketService.createBasket(createBasketRequest);
+        return new ResponseModel(basketService.createBasket(createBasketRequest));
     }
 
     @GetMapping("/api/v1/basket/{userId}")
     public ResponseModel<GetBasketResponse> getBasket(@PathVariable int userId) {
-        return basketService.getBasket(userId);
+        return new ResponseModel(basketService.getBasket(userId));
     }
 
 }

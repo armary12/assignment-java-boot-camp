@@ -16,6 +16,6 @@ public class UserController {
 
     @GetMapping("api/v1/user/{userId}")
     public ResponseModel<GetUserResponse> getUser(@PathVariable int userId){
-        return userService.getUser(userId);
+        return new ResponseModel(userService.getUser(userId));
     }
 }

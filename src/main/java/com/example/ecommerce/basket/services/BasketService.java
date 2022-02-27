@@ -22,7 +22,7 @@ public class BasketService {
     @Autowired
     BasketRepository basketRepository;
 
-    public ResponseModel<Basket> createBasket(CreateBasketRequest request) {
+    public Basket createBasket(CreateBasketRequest request) {
         Basket basket = new Basket();
         basket.setUserId(request.getUserId());
         basket.setBasketItems(request.getBasketItems());
@@ -30,13 +30,10 @@ public class BasketService {
         basket.setTotalQuantity(Arrays.stream(request.getBasketItems()).mapToInt(BasketItem::getProductQuantity).sum());
         basket.setCreatedDate(new Date());
         Basket basketResponse = basketRepository.save(basket);
-
-        ResponseModel<Basket> response = new ResponseModel();
-        response.setData(basketResponse);
-        return response;
+        return basketResponse;
     }
 
-    public ResponseModel<GetBasketResponse> getBasket(int userId) {
+    public GetBasketResponse getBasket(int userId) {
         Optional<Basket> basketOptional = basketRepository.findByUserId(userId);
         if (basketOptional.isEmpty()) {
             throw new BasketNotFoundException("Basket not found");
@@ -48,9 +45,6 @@ public class BasketService {
         basketResponse.setBasketItems(basket.getBasketItems());
         basketResponse.setTotalPrice(basket.getTotalPrice());
         basketResponse.setTotalQuantity(basket.getTotalQuantity());
-
-        ResponseModel<GetBasketResponse> response = new ResponseModel();
-        response.setData(basketResponse);
-        return response;
+        return basketResponse;
     }
 }

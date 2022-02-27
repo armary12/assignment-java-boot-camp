@@ -23,4 +23,5 @@ public class ProductResponse {
     private int score;
     private int reviewerCount;
 
+    public ProductResponse(){}
 }

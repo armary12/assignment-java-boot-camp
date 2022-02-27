@@ -15,7 +15,7 @@ public class OrderControllerAdvice
     @ResponseBody
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseModel paymentFail(PaymentFailException e) {
-        ResponseModel responseModel = new ResponseModel();
+        ResponseModel responseModel = new ResponseModel(null);
         responseModel.setMessage(e.getMessage());
         return responseModel;
     }

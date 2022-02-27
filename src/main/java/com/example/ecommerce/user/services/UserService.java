@@ -16,7 +16,7 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    public ResponseModel<GetUserResponse> getUser(int userId){
+    public GetUserResponse getUser(int userId){
         Optional<User> userOptional = userRepository.findById(userId);
         if (userOptional.isEmpty()) {
             throw new UserNotFoundException("User not found.");
@@ -35,9 +35,6 @@ public class UserService {
         userResponse.setEmail(user.getEmail());
         userResponse.setNewsSubscription(user.getNewsSubscription());
         userResponse.setStatus(user.getStatus());
-
-        ResponseModel<GetUserResponse> response = new ResponseModel();
-        response.setData(userResponse);
-        return response;
+        return userResponse;
     }
 }

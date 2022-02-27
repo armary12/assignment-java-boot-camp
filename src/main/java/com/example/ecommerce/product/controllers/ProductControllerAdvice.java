@@ -14,8 +14,8 @@ public class ProductControllerAdvice {
     @ExceptionHandler(ProductNotFoundException.class)
     @ResponseBody
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseModel productNotfound(ProductNotFoundException e) {
-        ResponseModel responseModel = new ResponseModel();
+    public ResponseModel productNotFound(ProductNotFoundException e) {
+        ResponseModel responseModel = new ResponseModel(null);
         responseModel.setMessage(e.getMessage());
         return responseModel;
     }
