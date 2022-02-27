@@ -37,4 +37,8 @@ public class UserService {
         userResponse.setStatus(user.getStatus());
         return userResponse;
     }
+
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 }
