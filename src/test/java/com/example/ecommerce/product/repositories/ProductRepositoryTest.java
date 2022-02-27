@@ -1,8 +1,6 @@
 package com.example.ecommerce.product.repositories;
 
 import com.example.ecommerce.product.repositories.entities.*;
-import com.example.ecommerce.user.repositories.UserRepository;
-import com.example.ecommerce.user.repositories.entities.User;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
