@@ -1,12 +1,10 @@
 package com.example.ecommerce.product.services;
 
-import com.example.ecommerce.common.model.ResponseModel;
 import com.example.ecommerce.product.exceptions.ProductNotFoundException;
 import com.example.ecommerce.product.models.ProductResponse;
 import com.example.ecommerce.product.repositories.ProductRepository;
 import com.example.ecommerce.product.repositories.entities.Product;
 import com.example.ecommerce.product.repositories.entities.ProductReview;
-import com.example.ecommerce.user.models.GetUserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -69,5 +67,9 @@ public class ProductService {
             return 0;
         }
         return productReviews.stream().mapToInt(e -> e.getScore()).sum()/productReviews.size();
+    }
+
+    public void setProductRepository(ProductRepository productRepository) {
+        this.productRepository = productRepository;
     }
 }
