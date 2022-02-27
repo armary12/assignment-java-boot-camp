@@ -1,8 +1,5 @@
 package com.example.ecommerce.user.services;
 
-import com.example.ecommerce.product.models.ProductResponse;
-import com.example.ecommerce.product.repositories.ProductRepository;
-import com.example.ecommerce.product.services.ProductService;
 import com.example.ecommerce.user.exceptions.UserNotFoundException;
 import com.example.ecommerce.user.models.GetUserResponse;
 import com.example.ecommerce.user.repositories.UserRepository;

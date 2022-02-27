@@ -6,9 +6,6 @@ import com.example.ecommerce.basket.models.CreateBasketRequest;
 import com.example.ecommerce.basket.models.GetBasketResponse;
 import com.example.ecommerce.basket.repositories.BasketRepository;
 import com.example.ecommerce.basket.repositories.entities.Basket;
-import com.example.ecommerce.common.model.ResponseModel;
-import com.example.ecommerce.order.repositories.entities.OrderTransaction;
-import com.example.ecommerce.product.exceptions.ProductNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

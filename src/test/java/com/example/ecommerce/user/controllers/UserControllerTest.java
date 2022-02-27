@@ -2,7 +2,6 @@ package com.example.ecommerce.user.controllers;
 
 import com.example.ecommerce.common.model.ResponseModel;
 import com.example.ecommerce.product.models.ProductResponse;
-import com.example.ecommerce.product.services.ProductService;
 import com.example.ecommerce.user.models.GetUserResponse;
 import com.example.ecommerce.user.services.UserService;
 import com.fasterxml.jackson.core.type.TypeReference;

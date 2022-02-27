@@ -1,6 +1,5 @@
 package com.example.ecommerce.order.services;
 
-import com.example.ecommerce.common.model.ResponseModel;
 import com.example.ecommerce.order.exceptions.PaymentFailException;
 import com.example.ecommerce.order.gateways.PaymentGateway;
 import com.example.ecommerce.order.models.OrderConfirmRequest;
