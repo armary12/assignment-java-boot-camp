@@ -29,7 +29,7 @@ class ProductControllerTest {
     private ProductService productService;
 
     @Test
-    @DisplayName("Should return product with id = 1 when receive input productId = 1")
+    @DisplayName("Should be success return product with id = 1 when receive input productId = 1")
     void getProductByIdSuccess() {
         // Arrange
         ProductResponse productResponse = new ProductResponse() ;
