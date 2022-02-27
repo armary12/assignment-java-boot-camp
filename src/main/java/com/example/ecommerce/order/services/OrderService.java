@@ -86,4 +86,12 @@ public class OrderService {
         paymentGatewayRequest.setTotalAmount(request.getNetPrice());
         return paymentGatewayRequest;
     }
+
+    public void setOrderTransactionRepository(OrderTransactionRepository orderTransactionRepository) {
+        this.orderTransactionRepository = orderTransactionRepository;
+    }
+
+    public void setPaymentGateway(PaymentGateway paymentGateway) {
+        this.paymentGateway = paymentGateway;
+    }
 }
