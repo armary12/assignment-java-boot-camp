@@ -12,6 +12,6 @@ public class PaymentGatewayRequest {
     private String cardType;
     private String cardNumber;
     private String cardHolderName;
-    private Date expiredDate;
+    private String expiredDate;
     private String ccv;
 }

@@ -20,7 +20,6 @@ public class PaymentGateway {
     }
 
     public PaymentGatewayResponse submitPayment(PaymentGatewayRequest request) {
-
         PaymentGatewayResponse paymentGatewayResponse = restTemplate.postForObject(paymentGateWayEndpoint, request, PaymentGatewayResponse.class);
         return paymentGatewayResponse;
     }

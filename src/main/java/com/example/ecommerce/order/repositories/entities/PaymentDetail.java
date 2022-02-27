@@ -1,0 +1,20 @@
+package com.example.ecommerce.order.repositories.entities;
+
+import lombok.Data;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Data
+@Entity
+public class PaymentDetail{
+	@Id
+	@GeneratedValue
+	private int id;
+	private String cardHolderName;
+	private String expiredDate;
+	private String ccv;
+	private String cardType;
+	private String cardNumber;
+}
