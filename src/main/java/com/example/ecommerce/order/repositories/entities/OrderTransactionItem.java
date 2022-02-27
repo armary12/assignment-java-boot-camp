@@ -1,11 +1,8 @@
 package com.example.ecommerce.order.repositories.entities;
 
-import com.example.ecommerce.order.models.PaymentDetail;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -14,10 +11,14 @@ public class OrderTransactionItem {
     @Id
     @GeneratedValue
     private int id;
-    private int orderTransactionId;
     private int price;
     private int quantity;
     private int totalPrice;
     private int productId;
     private Date createdDate;
+
+    @ManyToOne
+    @JoinColumn(name = "orderTransaction_id", nullable = false)
+    private OrderTransaction orderTransaction;
+
 }

@@ -12,10 +12,7 @@ import com.example.ecommerce.order.repositories.entities.OrderTransactionItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class OrderService {
@@ -36,16 +33,15 @@ public class OrderService {
         createOrderTransaction.setTotalItemQuantity(orderTransactionRequest.getTotalItemQuantity());
         createOrderTransaction.setUserId(orderTransactionRequest.getUserId());
         createOrderTransaction.setDeliveryAddress(orderTransactionRequest.getDeliveryAddress());
+        createOrderTransaction.setPaymentDetail(orderTransactionRequest.getPaymentDetail());
         createOrderTransaction.setPromotionDetail(orderTransactionRequest.getPromotionDetail());
         createOrderTransaction.setShippingDetail(orderTransactionRequest.getShippingDetail());
         createOrderTransaction.setCreatedDate(new Date());
         createOrderTransaction.setOrderStatus("PENDING");
-        OrderTransaction orderTransaction = orderTransactionRepository.save(createOrderTransaction);
 
         List<OrderTransactionItem> orderTransactionItemList = new ArrayList<>();
         for (OrderItem orderItem : orderTransactionRequest.getOrderItems()) {
             OrderTransactionItem orderTransactionItem = new OrderTransactionItem();
-            orderTransactionItem.setOrderTransactionId(orderTransaction.getId());
             orderTransactionItem.setPrice(orderItem.getPrice());
             orderTransactionItem.setQuantity(orderItem.getQuantity());
             orderTransactionItem.setProductId(orderItem.getProductId());
@@ -53,7 +49,9 @@ public class OrderService {
             orderTransactionItem.setCreatedDate(new Date());
             orderTransactionItemList.add(orderTransactionItem);
         }
-        orderTransactionItemRepository.saveAll(orderTransactionItemList);
+        createOrderTransaction.setOrderTransactionItems(orderTransactionItemList);
+        OrderTransaction orderTransaction = orderTransactionRepository.save(createOrderTransaction);
+
 
         PaymentGatewayRequest paymentGatewayRequest = new PaymentGatewayRequest();
         paymentGatewayRequest.setOrderId(orderTransaction.getId());
