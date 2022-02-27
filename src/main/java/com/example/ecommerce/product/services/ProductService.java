@@ -1,10 +1,12 @@
 package com.example.ecommerce.product.services;
 
+import com.example.ecommerce.common.model.ResponseModel;
 import com.example.ecommerce.product.exceptions.ProductNotFoundException;
 import com.example.ecommerce.product.models.ProductResponse;
 import com.example.ecommerce.product.repositories.ProductRepository;
 import com.example.ecommerce.product.repositories.entities.Product;
 import com.example.ecommerce.product.repositories.entities.ProductReview;
+import com.example.ecommerce.user.models.GetUserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,16 +20,19 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    public ProductResponse getProductById(int id) {
+    public ResponseModel<ProductResponse> getProductById(int id) {
         Optional<Product> product = productRepository.findById(id);
         if (product.isEmpty()){
             throw new ProductNotFoundException("Product not found");
         }
-        ProductResponse productresponse = mapProductResponse(product.get());
-        return productresponse;
+        ProductResponse productResponse = mapProductResponse(product.get());
+
+        ResponseModel<ProductResponse> response = new ResponseModel();
+        response.setData(productResponse);
+        return response;
     }
 
-    public List<ProductResponse> getProducts(String search) {
+    public ResponseModel<List<ProductResponse>> getProducts(String search) {
         List<Product> products;
         if (search != null && !search.isEmpty()){
             products = productRepository.findByNameContaining(search);
@@ -35,7 +40,10 @@ public class ProductService {
             products = productRepository.findAll();
         }
         List<ProductResponse> productsResponse = products.stream().map(e -> mapProductResponse(e)).collect(Collectors.toList());
-        return productsResponse;
+
+        ResponseModel<List<ProductResponse>> response = new ResponseModel();
+        response.setData(productsResponse);
+        return response;
     }
 
 

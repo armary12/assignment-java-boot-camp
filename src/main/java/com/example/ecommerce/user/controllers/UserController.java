@@ -1,5 +1,6 @@
 package com.example.ecommerce.user.controllers;
 
+import com.example.ecommerce.common.model.ResponseModel;
 import com.example.ecommerce.user.models.GetUserResponse;
 import com.example.ecommerce.user.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ public class UserController {
     UserService userService;
 
     @GetMapping("api/v1/user/{userId}")
-    public GetUserResponse getUser(@PathVariable int userId){
+    public ResponseModel<GetUserResponse> getUser(@PathVariable int userId){
         return userService.getUser(userId);
     }
 }

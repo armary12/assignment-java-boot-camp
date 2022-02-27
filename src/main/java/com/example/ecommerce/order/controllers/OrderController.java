@@ -1,5 +1,6 @@
 package com.example.ecommerce.order.controllers;
 
+import com.example.ecommerce.common.model.ResponseModel;
 import com.example.ecommerce.order.models.OrderConfirmRequest;
 import com.example.ecommerce.order.repositories.entities.OrderTransaction;
 import com.example.ecommerce.order.services.OrderService;
@@ -15,7 +16,7 @@ public class OrderController {
     OrderService orderService;
 
     @PostMapping("api/v1/order/confirm")
-    public OrderTransaction confirmOrder(@RequestBody OrderConfirmRequest orderConfirmRequest){
+    public ResponseModel<OrderTransaction> confirmOrder(@RequestBody OrderConfirmRequest orderConfirmRequest){
         return orderService.createOrderTransaction(orderConfirmRequest);
     }
 }

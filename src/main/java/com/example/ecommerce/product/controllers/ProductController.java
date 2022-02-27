@@ -1,7 +1,6 @@
 package com.example.ecommerce.product.controllers;
 
-import com.example.ecommerce.landing.models.LandingResponse;
-import com.example.ecommerce.landing.services.LandingService;
+import com.example.ecommerce.common.model.ResponseModel;
 import com.example.ecommerce.product.models.ProductResponse;
 import com.example.ecommerce.product.repositories.entities.Product;
 import com.example.ecommerce.product.services.ProductService;
@@ -21,12 +20,12 @@ public class ProductController {
     ProductService productService;
 
     @GetMapping("/api/v1/product/{id}")
-    public ProductResponse getProductById(@PathVariable int id) {
+    public ResponseModel<ProductResponse> getProductById(@PathVariable int id) {
         return productService.getProductById(id);
     }
 
     @GetMapping("/api/v1/product")
-    public List<ProductResponse> getProducts(@RequestParam(value = "search", required = false) String search) {
+    public ResponseModel<List<ProductResponse>> getProducts(@RequestParam(value = "search", required = false) String search) {
         return productService.getProducts(search);
     }
 }

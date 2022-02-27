@@ -1,6 +1,6 @@
 package com.example.ecommerce.order.controllers;
 
-import com.example.ecommerce.common.model.ErrorResponse;
+import com.example.ecommerce.common.model.ResponseModel;
 import com.example.ecommerce.order.exceptions.PaymentFailException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -14,7 +14,9 @@ public class OrderControllerAdvice
     @ExceptionHandler(PaymentFailException.class)
     @ResponseBody
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResponse paymentFail(PaymentFailException e) {
-        return new ErrorResponse(e.getMessage());
+    public ResponseModel paymentFail(PaymentFailException e) {
+        ResponseModel responseModel = new ResponseModel();
+        responseModel.setMessage(e.getMessage());
+        return responseModel;
     }
 }

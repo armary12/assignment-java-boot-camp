@@ -1,5 +1,6 @@
 package com.example.ecommerce.user.services;
 
+import com.example.ecommerce.common.model.ResponseModel;
 import com.example.ecommerce.user.exceptions.UserNotFoundException;
 import com.example.ecommerce.user.models.GetUserResponse;
 import com.example.ecommerce.user.repositories.UserRepository;
@@ -15,7 +16,7 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    public GetUserResponse getUser(int userId){
+    public ResponseModel<GetUserResponse> getUser(int userId){
         Optional<User> userOptional = userRepository.findById(userId);
         if (userOptional.isEmpty()) {
             throw new UserNotFoundException("User not found.");
@@ -34,6 +35,9 @@ public class UserService {
         userResponse.setEmail(user.getEmail());
         userResponse.setNewsSubscription(user.getNewsSubscription());
         userResponse.setStatus(user.getStatus());
-        return userResponse;
+
+        ResponseModel<GetUserResponse> response = new ResponseModel();
+        response.setData(userResponse);
+        return response;
     }
 }

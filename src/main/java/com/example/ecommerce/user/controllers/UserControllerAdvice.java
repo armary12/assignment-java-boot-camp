@@ -1,6 +1,6 @@
-package com.example.ecommerce.product.controllers;
+package com.example.ecommerce.user.controllers;
 
-import com.example.ecommerce.common.model.ErrorResponse;
+import com.example.ecommerce.common.model.ResponseModel;
 import com.example.ecommerce.product.exceptions.ProductNotFoundException;
 import com.example.ecommerce.user.exceptions.UserNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -15,7 +15,9 @@ public class UserControllerAdvice {
     @ExceptionHandler(UserNotFoundException.class)
     @ResponseBody
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ErrorResponse userNotFound(UserNotFoundException e) {
-        return new ErrorResponse(e.getMessage());
+    public ResponseModel userNotFound(UserNotFoundException e) {
+        ResponseModel responseModel = new ResponseModel();
+        responseModel.setMessage(e.getMessage());
+        return responseModel;
     }
 }
