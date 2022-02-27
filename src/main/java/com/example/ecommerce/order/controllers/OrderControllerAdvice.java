@@ -13,7 +13,7 @@ public class OrderControllerAdvice
 {
     @ExceptionHandler(PaymentFailException.class)
     @ResponseBody
-    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse paymentFail(PaymentFailException e) {
         return new ErrorResponse(e.getMessage());
     }
